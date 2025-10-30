@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="简洁的手机端生活管理应用">
+    <title>每日生活 - 待办事项、灵感、感恩、成就</title>
+
+    <!-- PWA相关 -->
+    <meta name="theme-color" content="#2563eb">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- CSS样式 -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 主应用容器 -->
+    <div id="app" class="app">
+        <!-- 顶部导航栏 -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1 class="app-title">每日生活</h1>
+                </div>
+                <div class="header-right">
+                    <div class="date-display" id="currentDate"></div>
+                    <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.06 16.8 12 15.52 12 14s-.94-2.8-2.5-3.45c.76-.35 1.61-.55 2.5-.55 3.31 0 6 2.69 6 6s-2.69 6-6 6z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 欢迎信息 -->
+            <section class="welcome-section">
+                <h2 class="greeting" id="greeting">早上好！</h2>
+                <p class="welcome-message">让今天变得充实而有意义</p>
+            </section>
+
+            <!-- 功能卡片网格 -->
+            <section class="feature-grid">
+                <!-- 待办事项卡片 -->
+                <div class="feature-card" data-module="todos">
+                    <div class="card-header">
+                        <div class="card-icon todos-icon">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">待办事项</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats">
+                            <span class="stat-number" id="todosCount">0</span>
+                            <span class="stat-label">今日待办</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="todosProgress"></div>
+                        </div>
+                        <p class="card-description">管理今日任务，提高工作效率</p>
+                    </div>
+                    <button class="card-button" onclick="navigateToModule('todos')">
+                        开始管理 →
+                    </button>
+                </div>
+
+                <!-- 每日灵感卡片 -->
+                <div class="feature-card" data-module="inspiration">
+                    <div class="card-header">
+                        <div class="card-icon inspiration-icon">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">每日灵感</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats">
+                            <span class="stat-number" id="inspirationCount">0</span>
+                            <span class="stat-label">条灵感</span>
+                        </div>
+                        <div class="recent-inspiration" id="recentInspiration">
+                            <p class="inspiration-text">记录你的灵感火花...</p>
+                        </div>
+                        <p class="card-description">捕捉创意瞬间，激发无限可能</p>
+                    </div>
+                    <button class="card-button" onclick="navigateToModule('inspiration')">
+                        记录灵感 →
+                    </button>
+                </div>
+
+                <!-- 每日感恩卡片 -->
+                <div class="feature-card" data-module="gratitude">
+                    <div class="card-header">
+                        <div class="card-icon gratitude-icon">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">每日感恩</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats">
+                            <span class="stat-number" id="gratitudeCount">0</span>
+                            <span class="stat-label">条感恩</span>
+                        </div>
+                        <div class="gratitude-reminder">
+                            <p class="reminder-text">今天你感恩了吗？</p>
+                        </div>
+                        <p class="card-description">记录美好事物，培养感恩心态</p>
+                    </div>
+                    <button class="card-button" onclick="navigateToModule('gratitude')">
+                        表达感恩 →
+                    </button>
+                </div>
+
+                <!-- 每日成就卡片 -->
+                <div class="feature-card" data-module="achievements">
+                    <div class="card-header">
+                        <div class="card-icon achievements-icon">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm2.86-2h8.28l.96-5.84-3.93 3.72L12 8.4l-1.17 2.48-3.93-3.72L7.86 14z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">每日成就</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats">
+                            <span class="stat-number" id="achievementsCount">0</span>
+                            <span class="stat-label">个成就</span>
+                        </div>
+                        <div class="achievement-streak">
+                            <span class="streak-text">连续 <span id="streakDays">0</span> 天</span>
+                        </div>
+                        <p class="card-description">记录每个进步，见证成长轨迹</p>
+                    </div>
+                    <button class="card-button" onclick="navigateToModule('achievements')">
+                        查看成就 →
+                    </button>
+                </div>
+            </section>
+
+            <!-- 快速添加区域 -->
+            <section class="quick-add-section">
+                <h3 class="section-title">快速添加</h3>
+                <div class="quick-add-buttons">
+                    <button class="quick-add-btn" onclick="quickAdd('todo')">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                        快速待办
+                    </button>
+                    <button class="quick-add-btn" onclick="quickAdd('inspiration')">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                        快速灵感
+                    </button>
+                    <button class="quick-add-btn" onclick="quickAdd('gratitude')">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                        快速感恩
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- 底部导航栏 -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" data-page="home">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                <span class="nav-label">首页</span>
+            </div>
+            <div class="nav-item" data-page="stats">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                <span class="nav-label">统计</span>
+            </div>
+            <div class="nav-item add-button" onclick="showAddMenu()">
+                <div class="add-icon">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="nav-item" data-page="calendar">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                </svg>
+                <span class="nav-label">日历</span>
+            </div>
+            <div class="nav-item" data-page="settings">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+                </svg>
+                <span class="nav-label">设置</span>
+            </div>
+        </nav>
+
+        <!-- 快速添加弹窗 -->
+        <div class="modal-overlay" id="quickAddModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">快速添加</h3>
+                    <button class="modal-close" onclick="closeModal('quickAddModal')">×</button>
+                </div>
+                <div class="modal-content">
+                    <div class="quick-add-options">
+                        <button class="quick-add-option" onclick="quickAddFromModal('todo')">
+                            <div class="option-icon todo-icon">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                                </svg>
+                            </div>
+                            <span>添加待办事项</span>
+                        </button>
+                        <button class="quick-add-option" onclick="quickAddFromModal('inspiration')">
+                            <div class="option-icon inspiration-icon">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <span>记录灵感</span>
+                        </button>
+                        <button class="quick-add-option" onclick="quickAddFromModal('gratitude')">
+                            <div class="option-icon gratitude-icon">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+                            <span>表达感恩</span>
+                        </button>
+                        <button class="quick-add-option" onclick="quickAddFromModal('achievement')">
+                            <div class="option-icon achievement-icon">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm2.86-2h8.28l.96-5.84-3.93 3.72L12 8.4l-1.17 2.48-3.93-3.72L7.86 14z"/>
+                                </svg>
+                            </div>
+                            <span>记录成就</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/todos.js"></script>
+    <script src="js/inspiration.js"></script>
+    <script src="js/gratitude.js"></script>
+    <script src="js/achievements.js"></script>
+</body>
+</html>

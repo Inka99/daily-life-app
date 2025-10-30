@@ -1,0 +1,136 @@
+{
+  "name": "每日生活 - 待办事项、灵感、感恩、成就",
+  "short_name": "每日生活",
+  "description": "简洁的手机端生活管理应用，包含待办事项、每日灵感、每日感恩、每日成就功能",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "zh-CN",
+  "categories": ["lifestyle", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "快速添加待办",
+      "short_name": "待办",
+      "description": "快速添加待办事项",
+      "url": "/pages/todos.html?action=add",
+      "icons": [
+        {
+          "src": "assets/icons/todo-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "记录灵感",
+      "short_name": "灵感",
+      "description": "快速记录灵感",
+      "url": "/pages/inspiration.html?action=add",
+      "icons": [
+        {
+          "src": "assets/icons/inspiration-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "感恩记录",
+      "short_name": "感恩",
+      "description": "快速记录感恩",
+      "url": "/pages/gratitude.html?action=add",
+      "icons": [
+        {
+          "src": "assets/icons/gratitude-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "成就记录",
+      "short_name": "成就",
+      "description": "快速记录成就",
+      "url": "/pages/achievements.html?action=add",
+      "icons": [
+        {
+          "src": "assets/icons/achievement-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/home-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "主页"
+    },
+    {
+      "src": "assets/screenshots/todos-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "待办事项"
+    },
+    {
+      "src": "assets/screenshots/inspiration-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "每日灵感"
+    }
+  ]
+}
