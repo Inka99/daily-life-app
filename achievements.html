@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日成就 - 每日生活</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <div id="app" class="app">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="back-button" onclick="goBack()">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                        </svg>
+                    </button>
+                    <h1 class="page-title">每日成就</h1>
+                </div>
+                <div class="header-right">
+                    <button class="stats-button" id="statsButton">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <!-- 成就统计 -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalAchievements">0</span>
+                        <span class="stat-label">总成就</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="currentStreak">0</span>
+                        <span class="stat-label">连续天数</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="thisMonth">0</span>
+                        <span class="stat-label">本月</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="badgeCount">0</span>
+                        <span class="stat-label">徽章</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 成就等级进度 -->
+            <section class="level-progress-section">
+                <h3 class="section-title">成就等级</h3>
+                <div class="level-progress">
+                    <div class="level-info">
+                        <span class="current-level" id="currentLevel">Lv.1</span>
+                        <span class="level-name" id="levelName">初学者</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="levelProgress"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="current-exp" id="currentExp">0</span>
+                        <span class="separator">/</span>
+                        <span class="required-exp" id="requiredExp">100</span>
+                        <span class="exp-label">经验值</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 徽章展示 -->
+            <section class="badges-section">
+                <h3 class="section-title">我的徽章</h3>
+                <div class="badges-grid" id="badgesGrid">
+                    <!-- 徽章将在这里动态生成 -->
+                    <div class="badge-item locked">
+                        <div class="badge-icon">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-8c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z"/>
+                            </svg>
+                        </div>
+                        <span class="badge-name">未解锁</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 今日成就 -->
+            <section class="today-achievements-section">
+                <h3 class="section-title">今日成就</h3>
+                <div class="today-achievements" id="todayAchievements">
+                    <!-- 今日成就列表 -->
+                    <div class="empty-today">
+                        <p class="empty-text">今天还没有记录成就</p>
+                        <button class="quick-add-achievement-btn" onclick="showAddAchievementModal()">
+                            记录今日成就
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 筛选选项 -->
+            <section class="filter-section">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">全部</button>
+                    <button class="filter-tab" data-filter="today">今天</button>
+                    <button class="filter-tab" data-filter="week">本周</button>
+                    <button class="filter-tab" data-filter="month">本月</button>
+                </div>
+                <div class="filter-categories">
+                    <button class="category-filter active" data-category="all">全部分类</button>
+                    <button class="category-filter" data-category="small">小成就</button>
+                    <button class="category-filter" data-category="medium">中成就</button>
+                    <button class="category-filter" data-category="large">大成就</button>
+                </div>
+            </section>
+
+            <!-- 成就时间线 -->
+            <section class="achievements-timeline-section">
+                <h3 class="section-title">成就时间线</h3>
+                <div class="achievements-timeline" id="achievementsTimeline">
+                    <!-- 成就时间线将在这里动态生成 -->
+                    <div class="empty-state" id="emptyState">
+                        <svg class="empty-icon" viewBox="0 0 24 24">
+                            <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm2.86-2h8.28l.96-5.84-3.93 3.72L12 8.4l-1.17 2.48-3.93-3.72L7.86 14z"/>
+                        </svg>
+                        <p class="empty-text">还没有成就记录</p>
+                        <p class="empty-subtext">开始记录你的每一个进步吧</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 浮动添加按钮 -->
+        <button class="fab-button" onclick="showAddAchievementModal()">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+            </svg>
+        </button>
+
+        <!-- 添加成就弹窗 -->
+        <div class="modal-overlay" id="addAchievementModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">记录成就</h3>
+                    <button class="modal-close" onclick="closeModal('addAchievementModal')">×</button>
+                </div>
+                <div class="modal-content">
+                    <form id="addAchievementForm" class="achievement-form">
+                        <div class="form-group">
+                            <label class="form-label">成就名称</label>
+                            <input type="text" class="form-input" id="achievementTitle" placeholder="给你的成就起个名字" required maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">成就描述</label>
+                            <textarea class="form-textarea" id="achievementDescription" placeholder="描述一下这个成就..." maxlength="500" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">成就类型</label>
+                            <div class="achievement-types">
+                                <label class="achievement-type">
+                                    <input type="radio" name="type" value="small" checked>
+                                    <div class="type-card">
+                                        <div class="type-icon small">⭐</div>
+                                        <div class="type-info">
+                                            <span class="type-name">小成就</span>
+                                            <span class="type-desc">日常小进步</span>
+                                            <span class="type-exp">+10 EXP</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="achievement-type">
+                                    <input type="radio" name="type" value="medium">
+                                    <div class="type-card">
+                                        <div class="type-icon medium">🏆</div>
+                                        <div class="type-info">
+                                            <span class="type-name">中成就</span>
+                                            <span class="type-desc">重要里程碑</span>
+                                            <span class="type-exp">+25 EXP</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="achievement-type">
+                                    <input type="radio" name="type" value="large">
+                                    <div class="type-card">
+                                        <div class="type-icon large">👑</div>
+                                        <div class="type-info">
+                                            <span class="type-name">大成就</span>
+                                            <span class="type-desc">重大突破</span>
+                                            <span class="type-exp">+50 EXP</span>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">相关技能</label>
+                            <select class="form-select" id="achievementSkill">
+                                <option value="">选择相关技能</option>
+                                <option value="work">工作技能</option>
+                                <option value="study">学习能力</option>
+                                <option value="health">健康运动</option>
+                                <option value="social">社交能力</option>
+                                <option value="creative">创意思维</option>
+                                <option value="personal">个人成长</option>
+                                <option value="other">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closeModal('addAchievementModal')">取消</button>
+                            <button type="submit" class="btn btn-primary">记录成就</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 成就详情弹窗 -->
+        <div class="modal-overlay" id="achievementDetailModal">
+            <div class="modal modal-large">
+                <div class="modal-header">
+                    <h3 class="modal-title">成就详情</h3>
+                    <button class="modal-close" onclick="closeModal('achievementDetailModal')">×</button>
+                </div>
+                <div class="modal-content">
+                    <div class="achievement-detail" id="achievementDetail">
+                        <!-- 成就详情内容将在这里动态生成 -->
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-secondary" onclick="editAchievement()">编辑</button>
+                        <button class="btn btn-primary" onclick="shareAchievement()">分享</button>
+                        <button class="btn btn-danger" onclick="deleteAchievement()">删除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 统计弹窗 -->
+        <div class="modal-overlay" id="statsModal">
+            <div class="modal modal-large">
+                <div class="modal-header">
+                    <h3 class="modal-title">成就统计</h3>
+                    <button class="modal-close" onclick="closeModal('statsModal')">×</button>
+                </div>
+                <div class="modal-content">
+                    <div class="stats-overview">
+                        <div class="overview-item">
+                            <span class="overview-number" id="statsTotal">0</span>
+                            <span class="overview-label">总成就数</span>
+                        </div>
+                        <div class="overview-item">
+                            <span class="overview-number" id="statsThisMonth">0</span>
+                            <span class="overview-label">本月成就</span>
+                        </div>
+                        <div class="overview-item">
+                            <span class="overview-number" id="statsStreak">0</span>
+                            <span class="overview-label">连续天数</span>
+                        </div>
+                        <div class="overview-item">
+                            <span class="overview-number" id="statsLevel">1</span>
+                            <span class="overview-label">当前等级</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-charts">
+                        <div class="chart-section">
+                            <h4>成就类型分布</h4>
+                            <div class="type-chart" id="typeChart">
+                                <!-- 类型分布图表 -->
+                            </div>
+                        </div>
+                        <div class="chart-section">
+                            <h4>每月成就趋势</h4>
+                            <div class="trend-chart" id="trendChart">
+                                <!-- 趋势图表 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/achievements.js"></script>
+</body>
+</html>

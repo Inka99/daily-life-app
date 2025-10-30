@@ -1,0 +1,693 @@
+/* 响应式设计 */
+
+/* 超小屏幕 (320px - 480px) */
+@media screen and (max-width: 480px) {
+    .header-content {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .main-content {
+        padding: var(--spacing-md);
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+
+    .quick-add-buttons {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .filter-tabs {
+        gap: 2px;
+    }
+
+    .filter-tab {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--text-xs);
+    }
+
+    .priority-options,
+    .category-options {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .mood-options {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-xs);
+    }
+
+    .achievement-types {
+        grid-template-columns: 1fr;
+    }
+
+    .type-card {
+        padding: var(--spacing-sm);
+    }
+
+    .badges-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-xs);
+    }
+
+    .badge-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .badge-name {
+        font-size: 10px;
+    }
+
+    .stats-overview {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+
+    .stats-charts {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-add-options {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .modal {
+        margin: var(--spacing-md);
+        max-width: calc(100vw - 2 * var(--spacing-md));
+    }
+
+    .modal-content {
+        padding: var(--spacing-md);
+    }
+
+    .modal-header {
+        padding: var(--spacing-md);
+    }
+
+    .modal-actions,
+    .form-actions {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .form-actions-right {
+        margin-left: 0;
+    }
+
+    .fab-button {
+        bottom: 70px;
+        right: var(--spacing-md);
+        width: 48px;
+        height: 48px;
+    }
+
+    .add-icon {
+        width: 48px;
+        height: 48px;
+        transform: translateY(-6px);
+    }
+
+    .greeting {
+        font-size: var(--text-2xl);
+    }
+
+    .card-header {
+        gap: var(--spacing-sm);
+    }
+
+    .card-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .card-title {
+        font-size: var(--text-base);
+    }
+
+    .stat-number {
+        font-size: var(--text-xl);
+    }
+
+    .predefined-tags {
+        gap: 4px;
+    }
+
+    .predefined-tag {
+        padding: 4px var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    .nav-label {
+        font-size: 10px;
+    }
+
+    .nav-item {
+        min-height: 56px;
+    }
+}
+
+/* 小屏幕 (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .quick-add-buttons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .mood-options {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .achievement-types {
+        grid-template-columns: 1fr;
+    }
+
+    .badges-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .stats-overview {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .quick-add-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 中等屏幕 (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .app {
+        max-width: 768px;
+        margin: 0 auto;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .header {
+        border-left: 1px solid var(--border-light);
+        border-right: 1px solid var(--border-light);
+    }
+
+    .bottom-nav {
+        border-left: 1px solid var(--border-light);
+        border-right: 1px solid var(--border-light);
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .quick-add-buttons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .mood-options {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .achievement-types {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .badges-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .stats-overview {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stats-charts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quick-add-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modal-large {
+        max-width: 700px;
+    }
+}
+
+/* 大屏幕 (1025px+) */
+@media screen and (min-width: 1025px) {
+    .app {
+        max-width: 1024px;
+        margin: 0 auto;
+        box-shadow: var(--shadow-xl);
+        border-left: 1px solid var(--border-light);
+        border-right: 1px solid var(--border-light);
+    }
+
+    .header {
+        border-left: none;
+        border-right: none;
+    }
+
+    .bottom-nav {
+        border-left: none;
+        border-right: none;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-xl);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-lg);
+    }
+
+    .quick-add-buttons {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-md);
+    }
+
+    .mood-options {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .achievement-types {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .badges-grid {
+        grid-template-columns: repeat(8, 1fr);
+        gap: var(--spacing-md);
+    }
+
+    .stats-overview {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-lg);
+    }
+
+    .stats-charts {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+
+    .quick-add-options {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+
+    .modal-large {
+        max-width: 800px;
+    }
+
+    .fab-button {
+        bottom: 100px;
+    }
+}
+
+/* 超大屏幕 (1281px+) */
+@media screen and (min-width: 1281px) {
+    .app {
+        max-width: 1280px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main-content {
+        padding: var(--spacing-xl);
+    }
+
+    .filter-tabs {
+        justify-content: center;
+    }
+
+    .badges-grid {
+        grid-template-columns: repeat(10, 1fr);
+    }
+}
+
+/* 横屏模式优化 */
+@media screen and (orientation: landscape) and (max-height: 600px) {
+    .header-content {
+        height: 50px;
+        padding: var(--spacing-xs) var(--spacing-md);
+    }
+
+    .app-title,
+    .page-title {
+        font-size: var(--text-base);
+    }
+
+    .main-content {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .welcome-section {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .greeting {
+        font-size: var(--text-xl);
+    }
+
+    .feature-card {
+        padding: var(--spacing-md);
+    }
+
+    .card-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .card-title {
+        font-size: var(--text-sm);
+    }
+
+    .stat-number {
+        font-size: var(--text-lg);
+    }
+
+    .section-title {
+        font-size: var(--text-base);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .quick-add-textarea {
+        min-height: 60px;
+    }
+
+    .bottom-nav {
+        padding: 2px 0;
+    }
+
+    .nav-item {
+        min-height: 50px;
+    }
+
+    .add-icon {
+        width: 44px;
+        height: 44px;
+        transform: translateY(-4px);
+    }
+
+    .fab-button {
+        bottom: 60px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .modal-content {
+        max-height: calc(90vh - 80px);
+    }
+}
+
+/* 打印样式 */
+@media print {
+    .header,
+    .bottom-nav,
+    .fab-button,
+    .action-button,
+    .btn,
+    .modal-overlay {
+        display: none !important;
+    }
+
+    .app {
+        box-shadow: none;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-content {
+        padding: 0;
+    }
+
+    .feature-card,
+    .todo-item,
+    .inspiration-item,
+    .gratitude-item,
+    .achievement-item {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid var(--border-medium);
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: #000;
+        background: #fff;
+    }
+
+    .text-primary,
+    .text-secondary,
+    .text-tertiary {
+        color: #000;
+    }
+
+    .bg-primary,
+    .bg-secondary,
+    .bg-tertiary {
+        background: #fff;
+    }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+    :root {
+        --border-light: var(--text-primary);
+        --border-medium: var(--text-primary);
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    }
+
+    .feature-card,
+    .todo-item,
+    .inspiration-item,
+    .gratitude-item,
+    .achievement-item {
+        border-width: 2px;
+    }
+
+    .btn {
+        border-width: 2px;
+    }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .feature-card::before {
+        display: none;
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .feature-card:hover,
+    .todo-item:hover,
+    .inspiration-item:hover,
+    .gratitude-item:hover,
+    .achievement-item:hover,
+    .btn:hover,
+    .card-button:hover {
+        transform: none;
+    }
+
+    .feature-card:active,
+    .todo-item:active,
+    .inspiration-item:active,
+    .gratitude-item:active,
+    .achievement-item:active {
+        transform: scale(0.98);
+    }
+
+    .fab-button:active {
+        transform: scale(0.95);
+    }
+
+    .add-button:active .add-icon {
+        transform: translateY(-8px) scale(0.95);
+    }
+
+    .action-button:active {
+        background-color: var(--bg-tertiary);
+        transform: scale(0.95);
+    }
+}
+
+/* 鼠标设备优化 */
+@media (hover: hover) and (pointer: fine) {
+    .feature-card:hover,
+    .todo-item:hover,
+    .inspiration-item:hover,
+    .gratitude-item:hover,
+    .achievement-item:hover {
+        cursor: pointer;
+    }
+
+    .nav-item:hover {
+        background-color: var(--bg-secondary);
+    }
+}
+
+/* 可调整字体大小 */
+@media screen and (max-resolution: 1dppx) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-resolution: 2dppx) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* PWA 全屏模式 */
+@media all and (display-mode: fullscreen) {
+    .app {
+        height: 100vh;
+        height: 100dvh;
+    }
+
+    .header {
+        position: sticky;
+        top: 0;
+    }
+
+    .bottom-nav {
+        position: sticky;
+        bottom: 0;
+    }
+
+    .fab-button {
+        bottom: 90px;
+    }
+}
+
+/* PWA 独立模式 */
+@media all and (display-mode: standalone) {
+    .app {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+
+    .header {
+        padding-top: calc(var(--spacing-md) + env(safe-area-inset-top));
+    }
+
+    .bottom-nav {
+        padding-bottom: calc(var(--spacing-xs) + env(safe-area-inset-bottom));
+    }
+
+    .fab-button {
+        bottom: calc(80px + env(safe-area-inset-bottom));
+    }
+}
+
+/* 焦点可见性增强 */
+.btn:focus-visible,
+.nav-item:focus-visible,
+.action-button:focus-visible,
+.quick-add-btn:focus-visible,
+.filter-tab:focus-visible,
+.category-btn:focus-visible,
+.priority-badge:focus-visible,
+.category-badge:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* 表单元素焦点增强 */
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.form-select:focus-visible,
+.search-input:focus-visible,
+.tag-input:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 1px;
+}
+
+/* 模态框焦点陷阱 */
+.modal-overlay.active {
+    /* 确保模态框获得焦点 */
+}
+
+.modal:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* 键盘导航支持 */
+.nav-item:focus-within {
+    background-color: var(--bg-secondary);
+}
+
+.feature-card:focus-within {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* 搜索功能增强 */
+@media (prefers-reduced-data: reduce) {
+    .modal-overlay {
+        backdrop-filter: none;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* 省电模式优化 */
+@media (prefers-reduced-data: reduce) {
+    .feature-card::before {
+        display: none;
+    }
+
+    .badge-icon {
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+    }
+
+    .progress-fill {
+        background: var(--text-tertiary);
+    }
+}

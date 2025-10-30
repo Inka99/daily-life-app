@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日感恩 - 每日生活</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <div id="app" class="app">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="back-button" onclick="goBack()">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                        </svg>
+                    </button>
+                    <h1 class="page-title">每日感恩</h1>
+                </div>
+                <div class="header-right">
+                    <button class="calendar-button" id="calendarButton">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <!-- 感恩统计 -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalGratitude">0</span>
+                        <span class="stat-label">总感恩</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="currentStreak">0</span>
+                        <span class="stat-label">连续天数</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="thisMonth">0</span>
+                        <span class="stat-label">本月</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="todayCount">0</span>
+                        <span class="stat-label">今日</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 今日感恩 -->
+            <section class="today-gratitude-section">
+                <h3 class="section-title">今日感恩</h3>
+                <div class="today-gratitude-form">
+                    <div class="gratitude-input-container">
+                        <textarea class="gratitude-textarea" id="gratitudeTextarea" placeholder="今天你感恩什么？" maxlength="200" rows="3"></textarea>
+                        <div class="gratitude-actions">
+                            <div class="category-select">
+                                <select class="category-dropdown" id="gratitudeCategory">
+                                    <option value="">选择分类</option>
+                                    <option value="family">家人</option>
+                                    <option value="friends">朋友</option>
+                                    <option value="work">工作</option>
+                                    <option value="health">健康</option>
+                                    <option value="life">生活</option>
+                                    <option value="nature">自然</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <button class="add-gratitude-btn" onclick="addTodayGratitude()">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="today-gratitude-list" id="todayGratitudeList">
+                        <!-- 今日感恩列表 -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 感恩提醒 -->
+            <section class="gratitude-reminder" id="gratitudeReminder">
+                <div class="reminder-content">
+                    <div class="reminder-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                        </svg>
+                    </div>
+                    <div class="reminder-text">
+                        <p>设置每日感恩提醒</p>
+                        <span class="reminder-time">每天 20:00</span>
+                    </div>
+                    <button class="reminder-toggle" id="reminderToggle">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 筛选选项 -->
+            <section class="filter-section">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">全部</button>
+                    <button class="filter-tab" data-filter="today">今天</button>
+                    <button class="filter-tab" data-filter="week">本周</button>
+                    <button class="filter-tab" data-filter="month">本月</button>
+                </div>
+                <div class="filter-categories">
+                    <button class="category-filter active" data-category="all">全部分类</button>
+                    <button class="category-filter" data-category="family">家人</button>
+                    <button class="category-filter" data-category="friends">朋友</button>
+                    <button class="category-filter" data-category="work">工作</button>
+                    <button class="category-filter" data-category="health">健康</button>
+                    <button class="category-filter" data-category="life">生活</button>
+                    <button class="category-filter" data-category="nature">自然</button>
+                </div>
+            </section>
+
+            <!-- 感恩历史 -->
+            <section class="gratitude-history-section">
+                <h3 class="section-title">感恩历史</h3>
+                <div class="gratitude-timeline" id="gratitudeTimeline">
+                    <!-- 感恩历史记录将在这里动态生成 -->
+                    <div class="empty-state" id="emptyState">
+                        <svg class="empty-icon" viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                        <p class="empty-text">还没有感恩记录</p>
+                        <p class="empty-subtext">开始记录生活中值得感恩的事物吧</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 浮动添加按钮 -->
+        <button class="fab-button" onclick="showAddGratitudeModal()">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+            </svg>
+        </button>
+
+        <!-- 添加感恩弹窗 -->
+        <div class="modal-overlay" id="addGratitudeModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">添加感恩记录</h3>
+                    <button class="modal-close" onclick="closeModal('addGratitudeModal')">×</button>
+                </div>
+                <div class="modal-content">
+                    <form id="addGratitudeForm" class="gratitude-form">
+                        <div class="form-group">
+                            <label class="form-label">感恩内容</label>
+                            <textarea class="form-textarea" id="gratitudeContent" placeholder="今天你感恩什么？" required maxlength="500" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">分类</label>
+                            <div class="category-options">
+                                <label class="category-option">
+                                    <input type="radio" name="category" value="family">
+                                    <span class="category-icon family">👨‍👩‍👧‍👦</span>
+                                    <span>家人</span>
+                                </label>
+                                <label class="category-option">
+                                    <input type="radio" name="category" value="friends">
+                                    <span class="category-icon friends">👥</span>
+                                    <span>朋友</span>
+                                </label>
+                                <label class="category-option">
+                                    <input type="radio" name="category" value="work">
+                                    <span class="category-icon work">💼</span>
+                                    <span>工作</span>
+                                </label>
+                                <label class="category-option">
+                                    <input type="radio" name="category" value="health">
+                                    <span class="category-icon health">❤️</span>
+                                    <span>健康</span>
+                                </label>
+                                <label class="category-option">
+                                    <input type="radio" name="category" value="life">
+                                    <span class="category-icon life">🌟</span>
+                                    <span>生活</span>
+                                </label>
+                                <label class="category-option">
+                                    <input type="radio" name="category" value="nature">
+                                    <span class="category-icon nature">🌿</span>
+                                    <span>自然</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">感恩程度</label>
+                            <div class="gratitude-level">
+                                <div class="level-options">
+                                    <label class="level-option">
+                                        <input type="radio" name="level" value="1">
+                                        <span class="level-emoji">🙂</span>
+                                        <span>一般</span>
+                                    </label>
+                                    <label class="level-option">
+                                        <input type="radio" name="level" value="2">
+                                        <span class="level-emoji">😊</span>
+                                        <span>开心</span>
+                                    </label>
+                                    <label class="level-option">
+                                        <input type="radio" name="level" value="3">
+                                        <span class="level-emoji">😄</span>
+                                        <span>非常开心</span>
+                                    </label>
+                                    <label class="level-option">
+                                        <input type="radio" name="level" value="4">
+                                        <span class="level-emoji">🥰</span>
+                                        <span>感动</span>
+                                    </label>
+                                    <label class="level-option">
+                                        <input type="radio" name="level" value="5" checked>
+                                        <span class="level-emoji">🙏</span>
+                                        <span>感恩</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closeModal('addGratitudeModal')">取消</button>
+                            <button type="submit" class="btn btn-primary">保存感恩</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 感恩详情弹窗 -->
+        <div class="modal-overlay" id="gratitudeDetailModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">感恩详情</h3>
+                    <button class="modal-close" onclick="closeModal('gratitudeDetailModal')">×</button>
+                </div>
+                <div class="modal-content">
+                    <div class="gratitude-detail" id="gratitudeDetail">
+                        <!-- 感恩详情内容将在这里动态生成 -->
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-secondary" onclick="editGratitude()">编辑</button>
+                        <button class="btn btn-primary" onclick="shareGratitude()">分享</button>
+                        <button class="btn btn-danger" onclick="deleteGratitude()">删除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/gratitude.js"></script>
+</body>
+</html>
